@@ -1,12 +1,4 @@
-//Working fine
-#include<iostream>
-#include<sys/types.h>
-#include<sys/socket.h>
-#include<unistd.h>
-#include<netdb.h>
-#include<string>
-#include<string.h>
-#include<arpa/inet.h>
+#include "my_macros.h"
 
 using namespace std;
 class splug
@@ -116,6 +108,7 @@ void splug::data_to_client()
     {
         //Clear the buffer
         memset(buf,0,4096);
+        strcpy(buf,"0");
 
         // Wait for message
         int bytesRecv=recv(clientSocket,buf,4096,0);
@@ -131,10 +124,13 @@ void splug::data_to_client()
         }     
         
         //Displady message 
-        cout<<"Recieved: "<<string(buf,0,bytesRecv)<<endl;               // Changed string to (char*)&
+        // cout << "Recieved: " << string(buf,0,bytesRecv) << endl;        // Changed string to (char*)&
+        cout << "Recieved: " << buf << endl;        // Changed string to (char*)&
         
         //Resend Message    
-        send(clientSocket,buf,bytesRecv+1,0);
-  
+        // string sendd;
+        // getline(cin, sendd);
+        // send(clientSocket, sendd.c_str(), sizeof(sendd.c_str()), 0);
+        send(clientSocket, buf, sizeof(buf), 0);
     }
 }

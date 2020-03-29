@@ -1,12 +1,4 @@
-#include<iostream>
-#include<sys/types.h>
-#include<sys/socket.h>
-#include<unistd.h>
-#include<netdb.h>
-#include<string>
-#include<string.h>
-#include<arpa/inet.h>
-#include<stdlib.h>
+#include "my_macros.h"
 
 using namespace std;
 class cplug
@@ -53,17 +45,6 @@ class cplug
         close(sock);
     }
 };
-
-int main()
-{
-    cplug obj;
-    obj.init_hint_struct();
-    if(obj.connect_to_server()==1)
-        exit(0);
-    obj.data_to_server();
-
-    return 0;
-}
 
 void cplug::data_to_server()
 {
